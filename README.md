@@ -1,4 +1,6 @@
 # CIFAR-10-PROJECT
+
+
 Project Title: CIFAR-10 Image Classification
 
 Description:
@@ -16,4 +18,4 @@ How to Use:
 Clone the repository.
 Run main.py to load the dataset, apply data augmentation, and train the CNN model.
 Evaluate model performance using accuracy, confusion matrix, and classification report.
-Feel free to explore and contribute to enhance the project!
+Feel free to explore and contribute to enhance the project

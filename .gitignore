@@ -1,10 +1,15 @@
-# Ignore compiled Python files
+
+# Ignore compiled Python filesd
+
+
 *.pyc
 
 # Ignore the __pycache__ folder.
+
 __pycache__/
 
 # Ignore IDE-specific files
+
 .vscode/
 .idea/
 venv/

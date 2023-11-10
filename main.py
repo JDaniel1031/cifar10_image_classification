@@ -6,10 +6,12 @@ from models.models import build_and_train_model
 from utils.additional_functionalities import apply_data_augmentation
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
+
+
 # Load and display the CIFAR-10 dataset.
 train_images, train_labels, test_images, test_labels = load_and_display_dataset()
 
-# Apply data augmentation
+# Apply data augmentation.
 augmented_datagen = apply_data_augmentation(train_images)
 
 # Build and train the model
@@ -32,6 +34,7 @@ print('Confusion Matrix:')
 print(conf_matrix)
 
 # Display confusion matrix as a heatmap
+
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 plt.figure(figsize=(10, 8))
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
