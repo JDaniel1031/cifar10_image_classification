@@ -6,7 +6,7 @@ from models.models import build_and_train_model
 from utils.additional_functionalities import apply_data_augmentation
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# Load and display the CIFAR-10 dataset
+# Load and display the CIFAR-10 dataset.
 train_images, train_labels, test_images, test_labels = load_and_display_dataset()
 
 # Apply data augmentation

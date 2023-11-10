@@ -16,7 +16,7 @@ def build_and_train_model(train_images, train_labels, augmented_datagen, test_im
 
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    # Train the model
+    # Train the model.
     model.fit(augmented_datagen.flow(train_images, train_labels, batch_size=32),
               epochs=10,
               validation_data=(test_images, test_labels))
