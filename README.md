@@ -23,7 +23,8 @@ Feel free to explore and contribute to enhance the project.
 Test Accuracy: 33.37%
 
 Confusion Matrix:
-[[329 201  10   3   5   5  17  28 305  97]
+
+ [[329 201  10   3   5   5  17  28 305  97]
  [  4 755   2   1   0   1   5  10  91 131]
  [107 110  68  38 116  56 204 148  47 106]
  [ 45 121  35 119  20 140 160 163  15 182]
@@ -36,13 +37,13 @@ Confusion Matrix:
 
 
 
-Classification Report:
+    Classification Report:
 
-              precision    recall  f1-score   support
+        precision    recall  f1-score   support
 
-    airplane       0.46      0.33      0.38      1000
-
-  automobile       0.33      0.76      0.46      1000
+        airplane       0.46      0.33      0.38      1000
+        
+        automobile       0.33      0.76      0.46      1000
 
         bird       0.28      0.07      0.11      1000
 
@@ -60,8 +61,8 @@ Classification Report:
 
        truck       0.19      0.28      0.23      1000
 
-    accuracy                           0.33     10000
+      accuracy                           0.33     10000
 
-   macro avg       0.34      0.33      0.31     10000
+     macro avg       0.34      0.33      0.31     10000
 
-weighted avg       0.34      0.33      0.31     10000
+     weighted avg       0.34      0.33      0.31     10000
