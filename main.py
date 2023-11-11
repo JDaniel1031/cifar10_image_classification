@@ -2,8 +2,9 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sns
+import subprocess
 from dataset.dataset import load_and_display_dataset
-from models.models import build_and_train_model
+from models.models import build_and_train_complex_model
 from utils.additional_functionalities import apply_data_augmentation
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
@@ -16,7 +17,7 @@ train_images, train_labels, test_images, test_labels = load_and_display_dataset(
 augmented_datagen = apply_data_augmentation(train_images)
 
 # Build and train the model
-model = build_and_train_model(train_images, train_labels, augmented_datagen, test_images, test_labels)
+model = build_and_train_complex_model(train_images, train_labels, augmented_datagen, test_images, test_labels)
 
 # Evaluate the model on the test set
 predictions = model.predict(test_images)
@@ -28,6 +29,9 @@ test_labels_int = np.array(test_labels)
 # Calculate accuracy
 accuracy = accuracy_score(test_labels_int, predictions.argmax(axis=1))
 print(f'Test Accuracy: {accuracy * 100:.2f}%')
+
+
+
 
 # Create and display confusion matrix
 conf_matrix = confusion_matrix(test_labels_int, predictions.argmax(axis=1))
@@ -43,6 +47,10 @@ plt.title('Confusion Matrix')
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
+
+# Run app.py
+subprocess.run(["python", "app.py"])
+
 
 # Display classification report
 class_report = classification_report(test_labels_int, predictions.argmax(axis=1), target_names=class_names)

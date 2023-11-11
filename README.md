@@ -41,9 +41,9 @@ Feel free to explore and contribute to enhance the project.
 
         precision    recall  f1-score   support
 
-        airplane       0.46      0.33      0.38      1000
+      airplane       0.46      0.33      0.38      1000
         
-        automobile       0.33      0.76      0.46      1000
+      automobile       0.33      0.76      0.46      1000
 
         bird       0.28      0.07      0.11      1000
 
