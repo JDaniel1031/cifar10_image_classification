@@ -18,8 +18,8 @@ def build_and_train_model(train_images, train_labels, augmented_datagen, test_im
 
     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    history = model.fit(augmented_datagen.flow(train_images, train_labels, batch_size=64),
-                        epochs=30,
+    history = model.fit(augmented_datagen.flow(train_images, train_labels, batch_size=100),
+                        epochs=1,
                         validation_data=(test_images, test_labels))
 
     return model
