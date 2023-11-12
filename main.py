@@ -12,7 +12,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 
 
 # Parameterization
-class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+class_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 rotation_range = 20
 width_shift_range = 0.2
 height_shift_range = 0.2
@@ -100,7 +100,7 @@ def main():
     logging.info("Training and evaluation completed.")
 
     # Run app.py
-    #subprocess.Popen(["python", "app.py"])
+    subprocess.Popen(["python", "app.py"])
 
 
 if __name__ == "__main__":

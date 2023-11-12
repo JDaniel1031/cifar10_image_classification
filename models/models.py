@@ -67,7 +67,7 @@ def build_and_train_complex_model(train_images, train_labels, augmented_datagen,
 
     # Continue training the model
     history = model.fit(augmented_datagen.flow(train_images, train_labels, batch_size=100),
-                        epochs=10,
+                        epochs=1,
                         validation_data=(test_images, test_labels),
                         callbacks=[checkpoint_callback])
 

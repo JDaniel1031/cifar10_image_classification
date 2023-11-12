@@ -5,6 +5,8 @@ import tensorflow as tf
 import os
 import io
 import base64
+
+
 app = Flask(__name__)
 
 # Load your trained model
@@ -13,6 +15,9 @@ model_path = os.path.join(base_dir, 'models/cifar10_model.h5')
 
 model = tf.keras.models.load_model(model_path)
 class_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+
+# Define the path to the test_images folder
+test_images_dir = os.path.join(base_dir, 'test_images')
 
 def preprocess_uploaded_image(image):
     # Resize the uploaded image to match your model requirements
@@ -61,6 +66,33 @@ def index():
         except Exception as e:
             return render_template('error.html', error_message=str(e))
     return render_template('index.html')
+
+@app.route('/test', methods=['GET'])
+def test_images():
+    # Load and test the images from the test_images folder
+    results = []
+    for class_name in class_names:
+        class_dir = os.path.join(test_images_dir, class_name)
+        image_files = [f for f in os.listdir(class_dir) if f.endswith('.jpg')]
+        for image_file in image_files:
+            try:
+                image_path = os.path.join(class_dir, image_file)
+                image = Image.open(image_path)
+                image_array = preprocess_uploaded_image(image)
+                class_idx = predict_class(image_array)
+                predicted_class_name = get_class_name(class_idx)
+                results.append({
+                    'image_path': image_path,
+                    'true_class_name': class_name,
+                    'predicted_class_name': predicted_class_name
+                })
+            except Exception as e:
+                results.append({
+                    'image_path': image_path,
+                    'true_class_name': class_name,
+                    'predicted_class_name': 'Error: ' + str(e)
+                })
+    return render_template('test_results.html', results=results)
 
 if __name__ == '__main__':
     app.run(debug=True)
