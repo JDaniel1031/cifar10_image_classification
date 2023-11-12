@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIFAR-10 Image Classification</title>
+    <title>Image Classification</title>
 </head>
 <body>
-    <h1>CIFAR-10 Image Classification</h1>
-    <form action="/" method="post">
-        <label for="image_url">Image URL:</label>
-        <input type="text" name="image_url" required>
-        <button type="submit">Classify</button>
+    <h1>Image Classification</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">Upload an Image:</label>
+        <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
+        <br>
+        <input type="submit" value="Classify">
     </form>
+    <img src="data:image/jpeg;base64,{{ image_data }}" alt="Uploaded Image" width="300">
+    <br>
+    {% if class_name %}
+        <h2>Result:</h2>
+        <p>Predicted Class: {{ class_name }}</p>
+    {% endif %}
 </body>
 </html>

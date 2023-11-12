@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
-from sklearn.model_selection import train_test_split
+
 
 
 def load_and_display_dataset():

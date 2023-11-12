@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classification Result</title>
+    <title>Image Classification Result</title>
 </head>
 <body>
-    <h2>Result:</h2>
-    <img src="{{ image_url }}" alt="Input Image">
-    <p>Classified as: {{ class_name }}</p>
+    <h1>Image Classification Result</h1>
+    
+    <h2>Input Image:</h2>
+    <img src="{{ image_url }}" alt="Uploaded Image" width="300">
+    
+    {% if class_name %}
+        <h2>Result:</h2>
+        <p>Classified as: {{ class_name }}</p>
+    {% endif %}
 </body>
 </html>

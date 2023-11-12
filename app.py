@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from PIL import Image
 import numpy as np
-import requests
-from io import BytesIO
 import tensorflow as tf
 import os
-
+import io
+import base64
 app = Flask(__name__)
 
 # Load your trained model
@@ -15,13 +14,20 @@ model_path = os.path.join(base_dir, 'models/cifar10_model.h5')
 model = tf.keras.models.load_model(model_path)
 class_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 
-def preprocess_image(image_url):
-    # Download the image
-    response = requests.get(image_url)
-    img = Image.open(BytesIO(response.content))
-    img = img.resize((32, 32))  # Adjust the size as per your model requirements
+def preprocess_uploaded_image(image):
+    # Resize the uploaded image to match your model requirements
+    img = image.resize((32, 32))
+    
+    # Convert the image to a NumPy array
     img_array = np.array(img) / 255.0  # Normalize the pixel values
-    img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
+    
+    # Ensure the image has the correct shape (height x width x channels)
+    if img_array.shape != (32, 32, 3):
+        raise ValueError("Uploaded image has an incorrect shape. It should be 32x32 pixels with 3 channels (RGB).")
+    
+    # Add batch dimension to match model input shape
+    img_array = np.expand_dims(img_array, axis=0)
+    
     return img_array
 
 def predict_class(image_array):
@@ -41,14 +47,17 @@ def get_class_name(class_idx):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        image_url = request.form['image_url']
-        # Fetch the image from the URL or handle uploaded file
         try:
-            image_array = preprocess_image(image_url)
-            class_idx = predict_class(image_array)
-            # Get the class name based on your dataset
-            class_name = get_class_name(class_idx)
-            return render_template('result.html', image_url=image_url, class_name=class_name)
+            uploaded_file = request.files['image']
+            if uploaded_file.filename != '':
+                image = Image.open(io.BytesIO(uploaded_file.read()))
+                image_array = preprocess_uploaded_image(image)
+                class_idx = predict_class(image_array)
+                class_name = get_class_name(class_idx)
+                image_base64 = base64.b64encode(image.tobytes()).decode('utf-8')
+                return render_template('result.html', class_name=class_name, image_data=image_base64)
+            else:
+                return render_template('error.html', error_message="No file uploaded.")
         except Exception as e:
             return render_template('error.html', error_message=str(e))
     return render_template('index.html')
